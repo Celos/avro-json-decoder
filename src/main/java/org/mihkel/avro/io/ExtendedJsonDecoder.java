@@ -745,18 +745,24 @@ public class ExtendedJsonDecoder extends ParsingDecoder
 			return schema.getField(name);
 		}
 		
+		Field foundField = null;
+		
 		for (Field field : schema.getFields()) {
 			Schema fieldSchema = field.schema();
 			if (Type.RECORD.equals(fieldSchema.getType())) {
-				return findField(fieldSchema, name);
+				foundField = findField(fieldSchema, name);
 			} else if (Type.ARRAY.equals(fieldSchema.getType())) {
-				return findField(fieldSchema.getElementType(), name);
+				foundField = findField(fieldSchema.getElementType(), name);
 			} else if (Type.MAP.equals(fieldSchema.getType())) {
-				return findField(fieldSchema.getValueType(), name);
+				foundField = findField(fieldSchema.getValueType(), name);
+			}
+			
+			if (foundField != null) {
+				return foundField;
 			}
 		}
 		
-		return null;
+		return foundField;
 	}
 }
 
