@@ -741,6 +741,10 @@ public class ExtendedJsonDecoder extends ParsingDecoder
 	}
 	
 	private static Field findField(Schema schema, String name) {
+		if (Schema.Type.NULL.equals(schema.getType())) {
+			return null;
+		}
+
 		if (schema.getField(name) != null) {
 			return schema.getField(name);
 		}
@@ -755,8 +759,15 @@ public class ExtendedJsonDecoder extends ParsingDecoder
 				foundField = findField(fieldSchema.getElementType(), name);
 			} else if (Type.MAP.equals(fieldSchema.getType())) {
 				foundField = findField(fieldSchema.getValueType(), name);
+			} else if (Schema.Type.UNION.equals(fieldSchema.getType())) {
+				for (Schema unionType : fieldSchema.getTypes()) {
+					foundField = findField(unionType, name);
+					if (foundField != null) {
+						break;
+					}
+				}
 			}
-			
+
 			if (foundField != null) {
 				return foundField;
 			}

@@ -118,7 +118,17 @@ public class ExtendedJsonDecoderTest extends TestCase {
 		GenericRecord record = readRecord(w, data);
 		Assert.assertNull(record.get("S"));
 	}
-	
+
+	@Test
+	public void testNestedOptionals() throws IOException {
+		String w = "{\"type\":\"record\",\"name\":\"rootType\",\"fields\":[{\"name\":\"outer\",\"type\":" +
+				"[\"null\",{\"type\":\"record\",\"name\":\"outerType\",\"fields\":[{\"name\":\"innerField\",\"type\":[\"null\",\"string\"],\"default\":null}]}" +
+				"],\"default\":null}]}";
+		String data = "{\"outer\":{\"outerType\":{}}}";
+		GenericRecord record = readRecord(w, data);
+		Assert.assertNull(record.get("S"));
+	}
+
 	public GenericRecord readRecord(String schemaString, String jsonData) throws IOException {
 		Schema schema = Schema.parse(schemaString);
 		Decoder decoder = new ExtendedJsonDecoder(schema, jsonData);
