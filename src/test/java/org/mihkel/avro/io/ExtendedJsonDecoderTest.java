@@ -70,7 +70,42 @@ public class ExtendedJsonDecoderTest extends TestCase {
 		
 		Assert.assertNull(record.get("a"));
 	}
-	
+
+	@Test
+	public void testUnionNullImplicit() throws IOException {
+		String w = "{\"type\":\"record\",\"name\":\"R\",\"fields\":[{\"type\":[\"null\",\"long\"],\"name\":\"a\",\"default\":null}]}";
+		GenericRecord record = readRecord(w, "{}");
+		Assert.assertNull(record.get("a"));
+	}
+
+	@Test
+	public void testUnionNullExplicitUntagged() throws IOException {
+		String w = "{\"type\":\"record\",\"name\":\"R\",\"fields\":[{\"type\":[\"null\",\"long\"],\"name\":\"a\",\"default\":null}]}";
+		GenericRecord record = readRecord(w, "{\"a\":null}");
+		Assert.assertNull(record.get("a"));
+	}
+
+	@Test
+	public void testUnionNullExplicitTagged() throws IOException {
+		String w = "{\"type\":\"record\",\"name\":\"R\",\"fields\":[{\"type\":[\"null\",\"long\"],\"name\":\"a\",\"default\":null}]}";
+		GenericRecord record = readRecord(w, "{\"a\":{\"null\": null}}");
+		Assert.assertNull(record.get("a"));
+	}
+
+	@Test
+	public void testUnionLongExplicitTagged() throws IOException {
+		String w = "{\"type\":\"record\",\"name\":\"R\",\"fields\":[{\"type\":[\"null\",\"long\"],\"name\":\"a\",\"default\":null}]}";
+		GenericRecord record = readRecord(w, "{\"a\":{\"long\": 42}}");
+		Assert.assertEquals(42L, record.get("a"));
+	}
+
+	@Test
+	public void testUnionLongExplicitUntagged() throws IOException {
+		String w = "{\"type\":\"record\",\"name\":\"R\",\"fields\":[{\"type\":[\"null\",\"long\"],\"name\":\"a\",\"default\":null}]}";
+		GenericRecord record = readRecord(w, "{\"a\":42}");
+		Assert.assertEquals(42L, record.get("a"));
+	}
+
 	@Test
 	public void testDefaultValuesAreInferred() throws IOException {
 		String w = "{\"type\":\"record\",\"name\":\"R\",\"fields\":[{\"type\":\"long\",\"name\":\"a\",\"default\":7}]}";
@@ -104,7 +139,7 @@ public class ExtendedJsonDecoderTest extends TestCase {
 		GenericRecord record = readRecord(w, data);
 		Assert.assertNull(record.get("S"));
 	}
-	
+
 	@Test
 	public void testWtf() throws IOException {
 		String w = "{\"type\":\"record\",\"name\":\"wrapper\",\"fields\":[{\"name\":\"data\",\"type\":" +
