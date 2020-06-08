@@ -4,7 +4,7 @@
 	<groupId>org.mihkel</groupId>
 	<artifactId>avro-json-decoder</artifactId>
 	<packaging>jar</packaging>
-	<version>1.3</version>
+	<version>1.3-SNAPSHOT</version>
 	<name>avro-json-decoder</name>
 	<url>http://maven.apache.org</url>
 	
@@ -17,7 +17,7 @@
 		<url>https://github.com/Celos/avro-json-decoder</url>
 		<connection>scm:git:https://github.com/Celos/avro-json-decoder.git</connection>
 		<developerConnection>scm:git:https://github.com/Celos/avro-json-decoder.git</developerConnection>
-	  <tag>avro-json-decoder-1.3</tag>
+	  <tag>HEAD</tag>
   </scm>
 	
 	<build>
