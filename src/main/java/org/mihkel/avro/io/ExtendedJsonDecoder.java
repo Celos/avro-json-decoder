@@ -50,7 +50,7 @@ import org.codehaus.jackson.JsonToken;
 import org.codehaus.jackson.ObjectCodec;
 
 /** A {@link Decoder} for Avro's JSON data encoding.
- * </p>
+ * <p>
  * Construct using {@link DecoderFactory}.
  * </p>
  * ExtendedJsonDecoder is not thread-safe.
@@ -96,15 +96,12 @@ public class ExtendedJsonDecoder extends ParsingDecoder
 	}
 	
 	/**
-	 * Reconfigures this JsonDecoder to use the InputStream provided.
-	 * <p/>
-	 * If the InputStream provided is null, a NullPointerException is thrown.
-	 * <p/>
+	 * <p>Reconfigures this JsonDecoder to use the InputStream provided.</p>
+	 * <p>If the InputStream provided is null, a NullPointerException is thrown.</p>
 	 * Otherwise, this JsonDecoder will reset its state and then
 	 * reconfigure its input.
 	 * @param in
 	 *   The IntputStream to read from. Cannot be null.
-	 * @throws IOException
 	 * @return this JsonDecoder
 	 */
 	public ExtendedJsonDecoder configure(InputStream in) throws IOException {
@@ -118,10 +115,8 @@ public class ExtendedJsonDecoder extends ParsingDecoder
 	}
 	
 	/**
-	 * Reconfigures this JsonDecoder to use the String provided for input.
-	 * <p/>
-	 * If the String provided is null, a NullPointerException is thrown.
-	 * <p/>
+	 * <p>Reconfigures this JsonDecoder to use the String provided for input.</p>
+	 * <p>If the String provided is null, a NullPointerException is thrown.</p>
 	 * Otherwise, this JsonDecoder will reset its state and then
 	 * reconfigure its input.
 	 * @param in
