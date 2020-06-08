@@ -4,7 +4,7 @@
 	<groupId>org.mihkel</groupId>
 	<artifactId>avro-json-decoder</artifactId>
 	<packaging>jar</packaging>
-	<version>1.4-SNAPSHOT</version>
+	<version>1.3-SNAPSHOT</version>
 	<name>avro-json-decoder</name>
 	<url>http://maven.apache.org</url>
 	
