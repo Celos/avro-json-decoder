@@ -10,7 +10,7 @@
 	
 	<properties>
 		<avro.version>1.8.2</avro.version>
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13.1</junit.version>
 	</properties>
 	
 	<scm>
